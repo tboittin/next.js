@@ -14,17 +14,30 @@ class MovieList extends React.Component {
     }
 
     increment = () => {
-        alert('incrementing number')
+        // const count = this.state.count
+        const { count } = this.state
+        // alert('incrementing number')
+        
+        //VERY BAD
+        // this.state.count=count+1
+        
+        this.setState({
+            count: count +1
+        })
     }
 
     decrement = () => {
-        alert('decrementing number')
+        // alert('decrementing number')
+        const { count } = this.state
+        this.setState({
+            count: count -1
+        })
     }
 
     render () {
         return (
             <>
-                <div>
+                <div className>
                     <button onClick={this.increment} className="btn btn-primary">Increment Number</button>
                     <button onClick={this.decrement} className="btn btn-primary">Decrement Number</button>
                     <h1>{this.state.count}</h1>
