@@ -2,24 +2,12 @@ import React from 'react'
 
 class MovieList extends React.Component {
 
-    // state={
-    //     count: 0
-    // }
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            count: 0
-        }
-
-        // this.increment = this.increment.bind(this)
-    }
-
-
     render () {
         return (
             <>
-                
+                <div className="text-center w-100">
+                    <h1>{this.props.count}</h1>
+                </div>
                 <div className="row">
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="card h-100">
