@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import Navbar from '../components/navbar'
@@ -11,10 +11,21 @@ import {getMovies} from '../actions'
 const Home = () => {
 
   const [movies,setMovies] = useState([])
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const resMovies = await getMovies()
+      setMovies(resMovies)
+    }
+
+    fetchData()
+    // getMovies().then((movies) => {
+    //   setMovies(movies)
+    // })
+    
+  }, [count])
   
-  getMovies().then((movies) => {
-    setMovies(movies)
-  })
 
   return (
     <div>
@@ -29,6 +40,9 @@ const Home = () => {
       <Navbar />
       <div className="home-page">
         <div className="container">
+          <button onClick={(() => {setCount(count+1)})}>
+            Click Me !
+          </button>
           <div className="row">
 
             <div className="col-lg-3">
