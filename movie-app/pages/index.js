@@ -79,19 +79,24 @@ import {getMovies} from '../actions'
 class Home extends React.Component {
 
   state = {
-    movies : []
+    movies : [],
+    errorMessage: ''
   }
 
   // called only once when component is mounted
-  async componentDidMount() {
-    getMovies().then((movies) => {
-      this.setState({movies:movies})
+  componentDidMount() {
+    getMovies()
+    .then((movies) => {
+        this.setState({movies:movies})
+    })
+    .catch((error) => {
+      this.setState({errorMessage: error})
     })
     
   }
   
   render () {
-    const {movies} = this.state
+    const {movies, errorMessage} = this.state
     return (
       <div>
         <Head>
@@ -118,7 +123,12 @@ class Home extends React.Component {
   
               <div className="col-lg-9">
                 <Carousel />
-                <div className="row">
+                <div className="row text-center w-100">
+                  { errorMessage &&
+                    <div className="alert alert-danger" role="alert">
+                      {errorMessage}
+                    </div>
+                  }
                   <MovieList movies={movies}/>
                 </div>
                 
