@@ -7,7 +7,6 @@ import {getMovies} from '../actions'
 
 const Home = (props) => {
 
-  console.log(JSON.stringify(props.images))
   const {images}= props
   return (
     <div className="home-page">
@@ -37,7 +36,9 @@ Home.getInitialProps = async () => {
   const movies = await getMovies()
   const images = movies.map(movie => ({
       id: `image-${movie.id}`,
-      image: movie.image
+      url: movie.image,
+      title: movie.name,
+      cover: movie.cover
     })
   )
 

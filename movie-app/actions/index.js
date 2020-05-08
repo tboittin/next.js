@@ -32,17 +32,6 @@ const MOVIE_DATA = [
       cover: "https://images.unsplash.com/photo-1462759353907-b2ea5ebd72e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2389&q=80",
       image: "https://img.cinemablend.com/filter:scale/quill/0/f/5/2/a/6/0f52a6843a25c1a5c1f9a0c00548cad9e1d912e2.jpg?mw=600"
     },
-    {
-      name: "asddadad",
-      releaseYear: "",
-      description: "sadaddad",
-      longDesc: "",
-      rating: "",
-      genre: "",
-      cover: "",
-      image: "",
-      id: "bimghho"
-    }
 ]
 
 export const getMovies = () => {
