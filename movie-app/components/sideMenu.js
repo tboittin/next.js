@@ -5,17 +5,18 @@ import { createMovie } from "../actions/index.js"
 // Containment
 const SideMenu = (props) => {
     const {categories} = props
+    let modal = null
 
     const handleCreateMovie = (movie) => {
         createMovie(movie).then((movies) => {
-            // close our modal after create
             console.log(JSON.stringify(movies))
+            modal.closeModal()
         })
     }
 
     return (
         <>
-            <Modal hasSubmit={false}>
+            <Modal ref={elem => modal = elem} hasSubmit={false}>
                 <MovieCreateForm handleFormSubmit={handleCreateMovie}/>
             </Modal>
             <h1 className="my-4">{props.appName}</h1>
