@@ -1,16 +1,21 @@
+import { useState} from 'react'
+import {useRouter} from 'next/router'
+
 import Modal from "./modal.js"
 import MovieCreateForm from "./movieCreateForm.js"
+
 import { createMovie } from "../actions/index.js"
 
 // Containment
 const SideMenu = (props) => {
     const {categories} = props
+    const router = useRouter()
     let modal = null
 
     const handleCreateMovie = (movie) => {
         createMovie(movie).then((movies) => {
-            console.log(JSON.stringify(movies))
             modal.closeModal()
+            router.push('/')
         })
     }
 
