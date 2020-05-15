@@ -1,7 +1,3 @@
-
-
-
-
 const next = require('next')
 const express = require('express');
 const bodyParser = require('body-parser')
@@ -25,7 +21,7 @@ app.prepare().then(() => {
     return res.json(moviesData)
   })
 
-  server.get('/api/v1/movies:id',(req, res)=>{
+  server.get('/api/v1/movies/:id',(req, res)=>{
     const {id} = req.params
     const movie = moviesData.find(m => m.id === id)
     return res.json(movie)
@@ -54,7 +50,19 @@ app.prepare().then(() => {
 
   server.delete('/api/v1/movies/:id',(req, res)=>{
     const {id} = req.params
-    return res.json({message:'Deleting post of id: '+ id})
+    const movieIndex = moviesData.findIndex(m => m.id === id)
+    moviesData.splice(movieIndex, 1)
+
+    const pathToFile = path.join(__dirname, filePath)
+    const stringifiedData = JSON.stringify(moviesData, null, 2)
+
+    fs.writeFile(pathToFile, stringifiedData, err => {
+      if (err) {
+        return res.status(422).send(err)
+      }
+
+      return res.json('Movie has been successfully deleted!')
+    })
   })
 
 //   server.get('/faq',(req, res)=>{
@@ -70,7 +78,6 @@ app.prepare().then(() => {
 
   //we are handling all of the request comming to our server
   server.get('*', (req, res) => {
-    //   next.js is handling requests and providing pages where we are navigating to 
     return handle(req, res)
   })
 
