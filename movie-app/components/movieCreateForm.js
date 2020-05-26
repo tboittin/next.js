@@ -1,15 +1,28 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 const MovieCreateForm = (props) => {
 
-    const [form, setForm] = useState({
+    const [ isInitialDataLoaded, setIsInitialDataLoaded] = useState(false)
+
+    const defaultData = {
         name: '',
         description: '',
         rating: '',
         image: '',
         cover: '',
-        longDesc: '',
-    })
+        longDesc: ''
+    }
+
+    const formData = props.initialData ? {...props.initialData} : defaultData
+    
+    const [form, setForm] = useState(formData)
+
+    // useEffect(()=>{
+    //     if (props.initialData){
+    //         setForm(props.initialData)
+    //         setIsInitialDataLoaded(true)
+    //     }
+    // }, [isInitialDataLoaded])
 
     const handleChange = (event) => {
         const target = event.target
@@ -18,7 +31,6 @@ const MovieCreateForm = (props) => {
         setForm({
             ...form,
             [name]: target.value,
-
         })
     }
 
@@ -122,7 +134,8 @@ const MovieCreateForm = (props) => {
                 <select 
                     onChange={handleGenreChange}
                     multiple 
-                    className="form-control" 
+                    className="form-control"
+                    name="genre" 
                     id="genre">
                 <option>drama</option>
                 <option>music</option>

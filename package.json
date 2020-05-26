@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "movie": "cd movie-app"
+    }
+}
